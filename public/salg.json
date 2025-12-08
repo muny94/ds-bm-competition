@@ -1,0 +1,18 @@
+[
+  {"name":"Emmanuel MUny.","team":"BM Tromsø","points":2500},
+  {"name":"Even Grønbech-Hope","team":"BM Tromsø","points":2100},
+  {"name":"Mats Solem","team":"BM Tromsø","points":1800},
+  {"name":"Ida Marie Korsberg","team":"BM Tromsø","points":1650},
+  {"name":"Kristin Mørch","team":"BM Tromsø","points":1500},
+  {"name":"Håkon T","team":"BM Tromsø","points":1400},
+  {"name":"Håkon Struve","team":"BM Tromsø","points":1300},
+  {"name":"Phanhu Khinkoe","team":"BM Tromsø","points":1200},
+  {"name":"Matias Meland","team":"BM Trondheim","points":1100},
+
+  {"name":"Daniel Krogh","team":"BM Oslo/Trondheim","points":2000},
+  {"name":"Aron Aminezghi","team":"BM Oslo/Trondheim","points":1900},
+  {"name":"Rizwan Ahmad","team":"BM Oslo/Trondheim","points":1700},
+  {"name":"Jakob Pollestad","team":"BM Oslo/Trondheim","points":1600},
+  {"name":"Frank Værnes","team":"BM Oslo/Trondheim","points":1500},
+  {"name":"Joakim Grønvik","team":"BM Oslo/Trondheim","points":1400}
+]
