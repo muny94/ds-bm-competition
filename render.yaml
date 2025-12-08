@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: ds-bm-competition
+    env: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: ADMIN_TOKEN
+        value: byttdette

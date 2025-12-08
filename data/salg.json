@@ -1,0 +1,124 @@
+{
+  "members": [
+    {
+      "id": 1,
+      "team": "BM Troms\u00f8",
+      "name": "Emmanuel M.",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 2,
+      "team": "BM Troms\u00f8",
+      "name": "Even Gr\u00f8nbech-Hope",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 3,
+      "team": "BM Troms\u00f8",
+      "name": "Mats Solem",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 4,
+      "team": "BM Troms\u00f8",
+      "name": "Ida Marie Korsberg",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 5,
+      "team": "BM Troms\u00f8",
+      "name": "Kristin M\u00f8rch",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 6,
+      "team": "BM Troms\u00f8",
+      "name": "H\u00e5kon T",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 7,
+      "team": "BM Troms\u00f8",
+      "name": "H\u00e5kon Struve",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 8,
+      "team": "BM Troms\u00f8",
+      "name": "Phanhu Khinkoe",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 9,
+      "team": "BM Oslo/Trondheim",
+      "name": "Daniel Krogh",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 10,
+      "team": "BM Oslo/Trondheim",
+      "name": "Aron Aminezghi",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 11,
+      "team": "BM Oslo/Trondheim",
+      "name": "Rizwan Ahmad",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 12,
+      "team": "BM Oslo/Trondheim",
+      "name": "Jakob Pollestad",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 13,
+      "team": "BM Oslo/Trondheim",
+      "name": "Frank V\u00e6rnes",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 14,
+      "team": "BM Oslo/Trondheim",
+      "name": "Joakim Gr\u00f8nvik",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    },
+    {
+      "id": 15,
+      "team": "BM Oslo/Trondheim",
+      "name": "Matias Meland",
+      "salg": 0,
+      "tilbud": 0,
+      "ringeminutter": 0
+    }
+  ]
+}

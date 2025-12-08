@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>DS BM Konkurranse — Live</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <img src="/img/logo.svg" alt="DS BM logo" class="logo">
+    <h1>DS BM Konkurranse</h1>
+    <nav><a class="btn" href="/admin.html">Admin</a><a class="btn ghost" href="/tv.html">TV-visning</a></nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero card">
+    <h2>Live leaderboard — DS BM</h2>
+    <p>Se hvem som leder i dag. Poeng beregnes fra salg, tilbud og ringeminutter.</p>
+  </section>
+
+  <section class="card grid">
+    <div class="leaderboard">
+      <h3>Toppliste</h3>
+      <ul id="leaderList"></ul>
+    </div>
+    <div class="summary">
+      <h3>Lagsammendrag</h3>
+      <div id="teamsSummary">Laster...</div>
+      <h4>Poengfordeling</h4>
+      <canvas id="teamChart" width="300" height="200"></canvas>
+    </div>
+  </section>
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

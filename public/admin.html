@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Admin — DS BM Konkurranse</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-header small">
+  <div class="container">
+    <img src="/img/logo.svg" class="logo">
+    <h1>Admin</h1>
+    <nav><a class="btn" href="/">Dashboard</a></nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="card">
+    <label>Admin-nøkkel <input id="adminTokenInput" type="password" placeholder="Skriv inn admin-nøkkel"></label>
+    <button id="saveTokenBtn" class="btn">Lagre</button>
+    <p id="tokenMsg" class="muted">Nøkkelen lagres lokalt i nettleseren.</p>
+  </section>
+
+  <section class="card">
+    <h3>Oppdater medlem</h3>
+    <label>Velg medlem <select id="memberSelect"></select></label>
+    <label>Salg (NOK) <input id="salg" type="number" min="0" value="0"></label>
+    <label>Tilbud (NOK) <input id="tilbud" type="number" min="0" value="0"></label>
+    <label>Ringeminutter <input id="ring" type="number" min="0" value="0"></label>
+    <div><button id="updateBtn" class="btn">Oppdater</button> <span id="msg"></span></div>
+  </section>
+
+  <section class="card">
+    <h3>Hurtigoppdatering</h3>
+    <label>Velg medlem <select id="memberSelectAdd"></select></label>
+    <label>+Salg (NOK) <input id="addSalg" type="number" min="0" value="0"></label>
+    <label>+Tilbud (NOK) <input id="addTilbud" type="number" min="0" value="0"></label>
+    <label>+Ringeminutter <input id="addRing" type="number" min="0" value="0"></label>
+    <div><button id="addBtn" class="btn">Legg til</button> <span id="addMsg"></span></div>
+  </section>
+</main>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>

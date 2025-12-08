@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  ds-bm:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - ADMIN_TOKEN=byttdette
+    volumes:
+      - ./data:/app/data
