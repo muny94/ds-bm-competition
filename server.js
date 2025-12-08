@@ -1,4 +1,12 @@
 // server.js - DS BM Competition (Storebrand-inspired)
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Serve static files
+app.use(express.static("public"));
+
+app.listen(PORT, () => console.log("Server running on " + PORT));
 const express = require('express');
 const http = require('http');
 const path = require('path');
