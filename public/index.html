@@ -1,48 +1,36 @@
 <!doctype html>
 <html lang="no">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Korrekt kobling til CSS -->
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin - DS BM Konkurranse</title>
   <link rel="stylesheet" href="/css/style.css">
-
-  <title>DS BM Konkurranse – Live</title>
 </head>
-
 <body>
-<header class="site-header">
-  <div class="container">
-    <img src="/img/logo.svg" alt="DS BM logo" class="logo">
-    <h1>DS BM Konkurranse</h1>
-    <nav><a class="btn" href="/admin.html">Admin</a><a class="btn ghost" href="/tv.html">TV-visning</a></nav>
-  </div>
-</header>
-
-<main class="container">
-  <section class="hero card">
-    <h2>Live leaderboard — DS BM</h2>
-    <p>Se hvem som leder i dag. Poeng beregnes fra salg, tilbud og ringeminutter.</p>
-  </section>
-
-  <section class="card grid">
-    <div class="leaderboard">
-      <h3>Toppliste</h3>
-      <ul id="leaderList"></ul>
+  <header class="site-header">
+    <div class="container">
+      <h1>DS BM Admin</h1>
+      <div class="controls">
+        <input id="token" placeholder="Admin token" style="width:220px" />
+        <button id="loadBtn">Load</button>
+        <button id="saveBtn">Save & Push</button>
+      </div>
     </div>
-    <div class="summary">
-      <h3>Lagsammendrag</h3>
-      <div id="teamsSummary">Laster...</div>
-      <h4>Poengfordeling</h4>
-      <canvas id="teamChart" width="300" height="200"></canvas>
-    </div>
-  </section>
-</main>
+  </header>
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/js/dashboard.js"></script>
+  <main class="container">
+    <section class="card">
+      <h2>Data (JSON array)</h2>
+      <textarea id="jsonArea" style="width:100%;height:360px;font-family:monospace;"></textarea>
+      <div style="margin-top:10px;">
+        <button id="prettyBtn">Format JSON</button>
+        <button id="tvOpenBtn">Åpne TV (ny fane)</button>
+        <span id="status" style="margin-left:20px;color:green"></span>
+      </div>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/admin.js"></script>
 </body>
 </html>
