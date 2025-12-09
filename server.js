@@ -1,96 +1,62 @@
-// server.js - DS BM Competition (complete)
-
 const express = require("express");
-const http = require("http");
-const path = require("path");
-const fs = require("fs");
-const { Server } = require("socket.io");
-
 const app = express();
+const http = require("http");
 const server = http.createServer(app);
+const { Server } = require("socket.io");
 const io = new Server(server);
+const fs = require("fs");
+const path = require("path");
 
 const PORT = process.env.PORT || 3000;
-const DATA_DIR = path.join(__dirname, "data");
-const DATA_FILE = path.join(DATA_DIR, "salg.json");
+const DATA_FILE = path.join(__dirname, "data", "salg.json");
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "changeme";
 
-// Ensure data folder + file exist
-function ensureDataFile() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR);
+// create data dir / file if missing
+function ensureData() {
+  const dir = path.join(__dirname, "data");
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   if (!fs.existsSync(DATA_FILE)) {
     const initial = [
-      // optional initial array. Leave empty if you prefer.
+      {"name":"Emmanuel Muny.","team":"BM Tromsø","points":2500},
+      {"name":"Even Grønbech-Hope","team":"BM Tromsø","points":2100},
+      {"name":"Mats Solem","team":"BM Tromsø","points":1800}
     ];
     fs.writeFileSync(DATA_FILE, JSON.stringify(initial, null, 2));
   }
 }
-ensureDataFile();
+ensureData();
 
-// Serve static files from public/
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("public"));
+app.use(express.json({ limit: "2mb" }));
 
-// Body parser for JSON
-app.use(express.json());
+app.get("/salg.json", (req, res) => {
+  res.sendFile(DATA_FILE);
+});
 
-// API: get data (for tv or anyone)
-app.get("/api/salg", (req, res) => {
+app.get("/admin/load", (req, res) => {
+  if (req.query.token !== ADMIN_TOKEN) return res.status(403).send("Forbidden");
+  res.sendFile(DATA_FILE);
+});
+
+app.post("/admin/save", (req, res) => {
+  if (req.query.token !== ADMIN_TOKEN) return res.status(403).send("Forbidden");
+  const body = req.body;
   try {
-    const raw = fs.readFileSync(DATA_FILE);
-    const json = JSON.parse(raw);
-    // Return either array or object with persons as requested by your tv.js
-    res.json(json);
-  } catch (err) {
-    res.status(500).json({ error: "Could not read data" });
+    fs.writeFileSync(DATA_FILE, JSON.stringify(body, null, 2));
+    io.emit("update", body);
+    res.send("OK");
+  } catch (e) {
+    res.status(500).send(e.message);
   }
 });
 
-// API: update data (admin posts new array)
-// Optional: add a simple token check as q param or header (ADMIN_TOKEN env)
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "changeme";
-app.post("/api/update", (req, res) => {
-  const token = req.headers["x-admin-token"] || req.query.token;
-  if (token !== ADMIN_TOKEN) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
+server.listen(PORT, () => console.log("Server running on " + PORT));
 
-  const newData = req.body;
-  if (!Array.isArray(newData)) {
-    return res.status(400).json({ error: "Expected JSON array of persons" });
-  }
-
+io.on("connection", socket => {
   try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(newData, null, 2));
-    io.emit("refresh", newData);
-    return res.json({ ok: true });
-  } catch (err) {
-    return res.status(500).json({ error: "Could not write data" });
+    let raw = fs.readFileSync(DATA_FILE, "utf8");
+    socket.emit("update", JSON.parse(raw));
+  } catch (e) {
+    socket.emit("update", []);
   }
-});
-
-// Websocket for real-time updates (also support admin pushing via socket)
-io.on("connection", (socket) => {
-  // Optional: send current data on connect
-  try {
-    const raw = fs.readFileSync(DATA_FILE);
-    const json = JSON.parse(raw);
-    socket.emit("refresh", json);
-  } catch (e) {}
-
-  socket.on("push", (data) => {
-    // expecting an array
-    const token = data && data.token;
-    if (token !== ADMIN_TOKEN) return socket.emit("error", "Unauthorized");
-    const members = data.members;
-    if (!Array.isArray(members)) return socket.emit("error", "Invalid payload");
-    try {
-      fs.writeFileSync(DATA_FILE, JSON.stringify(members, null, 2));
-      io.emit("refresh", members);
-    } catch (e) {
-      socket.emit("error", "Could not save");
-    }
-  });
-});
-
-server.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
 });
