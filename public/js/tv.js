@@ -1,54 +1,38 @@
-// tv.js
 const socket = io();
-
-const top3El = document.getElementById("top3");
-const listEl = document.getElementById("list");
+const list = document.getElementById("tvList");
 
 function render(data) {
-  // data expected to be array of {name,team,points}
-  const arr = (Array.isArray(data) ? data : []);
-  // sort by points desc
-  arr.sort((a,b)=> (b.points||0) - (a.points||0));
-
-  // Top3
-  top3El.innerHTML = "";
-  const top3 = arr.slice(0,3);
-  top3.forEach((p,i)=>{
-    const div = document.createElement("div");
-    div.className = "card" + (i===0 ? " pulse" : "");
-    div.innerHTML = `<h3>#${i+1} ${p.name}</h3>
-                     <div style="opacity:.7">${p.team || ""}</div>
-                     <div class="points">${p.points || 0}</div>`;
-    top3El.appendChild(div);
-  });
-
-  // Full list
-  listEl.innerHTML = "";
-  arr.forEach((p, idx)=>{
-    const li = document.createElement("li");
-    li.innerHTML = `<div><span class="name">${p.name}</span><div style="font-size:12px;color:rgba(255,255,255,0.6)">${p.team||""}</div></div>
-                    <div style="font-weight:700">${p.points||0}</div>`;
-    listEl.appendChild(li);
-  });
-}
-
-// initial fetch
-async function fetchData() {
-  try {
-    const res = await fetch("/api/salg");
-    if (!res.ok) throw new Error("no");
-    const data = await res.json();
-    render(data);
-  } catch (e) {
-    console.error("Could not fetch data", e);
+  if (!Array.isArray(data)) {
+    if (data && data.persons) data = data.persons;
+    else return;
   }
+
+  data.sort((a,b) => b.points - a.points);
+  list.innerHTML = "";
+
+  data.forEach((p, i) => {
+    let li = document.createElement("li");
+
+    if (i === 0) li.classList.add("top1");
+    else if (i === 1) li.classList.add("top2");
+    else if (i === 2) li.classList.add("top3");
+
+    const name = document.createElement("span");
+    name.className = "name";
+    name.textContent = p.name || "";
+
+    const points = document.createElement("span");
+    points.className = "points";
+    points.textContent = p.points != null ? p.points : "";
+
+    li.appendChild(name);
+    li.appendChild(points);
+
+    list.appendChild(li);
+  });
 }
-fetchData();
 
-// poll fallback every 20s
-setInterval(fetchData, 20000);
+socket.on("update", data => render(data));
 
-// socket live updates
-socket.on("refresh", (data) => {
-  render(data);
-});
+// initial fetch fallback
+fetch("/salg.json").then(r=>r.json()).then(render).catch(()=>{});
